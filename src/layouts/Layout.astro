@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="hu" class="scroll-smooth" scroll-pt-28>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+
+		<!-- Google Font: Outfit -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-[#090d16] text-[#F3F4F6] font-['Outfit',sans-serif] overflow-x-hidden antialiased selection:bg-[#0072FF] selection:text-white">
+		
+		<!-- Háttér Glow Effektek -->
+		<div class="fixed top-[-100px] left-[-100px] w-[450px] h-[450px] bg-[#0072FF]/20 rounded-full blur-[130px] pointer-events-none -z-10 animate-pulse"></div>
+		<div class="fixed top-[40%] right-[-150px] w-[550px] h-[550px] bg-[#00C6FF]/15 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+
+		<slot />
+
+		<!-- ANIMÁCIÓS SZKRIPT -->
+		<script>
+			function initAnimations() {
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('active');
+						}
+					});
+				}, {
+					threshold: 0.15
+				});
+
+				const revealElements = document.querySelectorAll('.reveal, .reveal-flip');
+				revealElements.forEach((el) => observer.observe(el));
+			}
+
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initAnimations);
+			} else {
+				initAnimations();
+			}
+		</script>
+
+	</body>
+</html>
+
+<style is:global>
+	@keyframes float {
+		0%, 100% { transform: translateY(0px); }
+		50% { transform: translateY(-10px); }
+	}
+	.animate-float {
+		animation: float 6s ease-in-out infinite;
+	}
+
+	/* ALAP BEÚSZÓ ANIMÁCIÓ */
+	.reveal {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+		will-change: opacity, transform;
+	}
+
+	.reveal.active {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* 3D ÁTFORDULÓ (FLIP) ANIMÁCIÓ A KÁRTYÁKNAK */
+	.reveal-flip {
+		opacity: 0;
+		transform: perspective(1000px) rotateY(-70deg) rotateX(10deg) scale(0.9);
+		transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+		will-change: opacity, transform;
+		transform-style: preserve-3d;
+	}
+
+	.reveal-flip.active {
+		opacity: 1;
+		transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1);
+	}
+</style>
