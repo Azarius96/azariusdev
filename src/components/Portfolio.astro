@@ -1,0 +1,77 @@
+---
+const projects = [
+    {
+        tag: '01 // EGYHÁZKÖZSÉGI WEBOLDAL',
+        title: 'Búzásbocsárdi Református Egyházközség',
+        description: 'Hivatalos bemutatkozó oldal egy 1303 óta működő erdélyi gyülekezetnek: istentiszteleti rend, egyháztörténet, templom-felújítási hírek, térkép és kapcsolatfelvételi űrlap.',
+        url: 'https://buzasbocsardirefgyul.pages.dev/',
+        domain: 'buzasbocsardirefgyul.pages.dev',
+        stack: ['Statikus oldal', 'OpenStreetMap', 'Cloudflare Pages'],
+        icon: '⛪',
+    },
+    {
+        tag: '02 // WEBALKALMAZÁS',
+        title: 'Gyülekezeti Adatbázis',
+        description: 'Gyülekezeti nyilvántartó rendszer saját szerver- és webes réteggel, Docker konténerben, Oracle Cloudon futtatva. Cloudflare reverse-proxy biztosítja a stabil, mindenhonnan elérhető címet.',
+        url: 'https://gyulekezeti-adatbazis.pages.dev/',
+        domain: 'gyulekezeti-adatbazis.pages.dev',
+        stack: ['Docker', 'Oracle Cloud', 'Cloudflare Proxy'],
+        icon: '🗂️',
+    },
+    {
+        tag: '03 // OKTATÁSI ALKALMAZÁS',
+        title: '365 Bibliai Történet',
+        description: 'Evert Kuijt gyerekeknek és tanítóknak szóló CD-ROM-os kiadványának modern, böngészőből használható újragondolása — Ó- és Újszövetség, útmutató és támogatási lehetőség.',
+        url: 'https://365bibliai.pages.dev/',
+        domain: '365bibliai.pages.dev',
+        stack: ['Single Page App', 'Reszponzív', 'Cloudflare Pages'],
+        icon: '📖',
+    },
+];
+---
+<section id="munkaink" class="scroll-mt-20 py-16 px-[5%] max-w-[1300px] mx-auto">
+    <div class="text-center mb-16 reveal">
+        <div class="inline-flex items-center gap-2 bg-[#0072FF]/10 border border-[#0072FF]/30 text-[#00C6FF] px-4 py-1.5 rounded-full text-xs font-semibold mb-4 tracking-wide">
+            🛠️ REFERENCIÁK
+        </div>
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Munkáink</h2>
+        <p class="text-gray-400 max-w-xl mx-auto">Élő projektek, amelyeket terveztünk, fejlesztettünk és üzemeltetünk.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {projects.map((project, i) => (
+            <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex flex-col bg-gradient-to-br from-gray-900/80 to-gray-900/30 border border-white/10 rounded-3xl overflow-hidden hover:border-[#0072FF]/50 hover:-translate-y-1 transition-all duration-300 group reveal-flip"
+                style={`transition-delay: ${i * 150}ms;`}
+            >
+                <div class="bg-[#070a12] px-4 py-3 flex items-center gap-2 border-b border-white/10">
+                    <div class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
+                    <span class="ml-2 text-xs font-mono text-gray-400 truncate">{project.domain}</span>
+                </div>
+
+                <div class="flex flex-col flex-1 p-8 relative">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-[#0072FF]/10 rounded-full blur-3xl group-hover:bg-[#0072FF]/20 transition-all"></div>
+                    <div class="w-12 h-12 bg-[#0072FF]/10 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:scale-110 transition-transform">
+                        {project.icon}
+                    </div>
+                    <span class="text-xs font-mono text-[#00C6FF] uppercase tracking-wider">{project.tag}</span>
+                    <h3 class="text-xl font-bold mt-1 mb-3">{project.title}</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-1">{project.description}</p>
+
+                    <div class="flex flex-wrap gap-2 pt-4 border-t border-white/5 mb-4">
+                        {project.stack.map((item) => (
+                            <span class="bg-white/5 border border-white/10 text-xs text-gray-300 px-3 py-1.5 rounded-lg font-mono">{item}</span>
+                        ))}
+                    </div>
+
+                    <span class="text-sm font-semibold text-[#00C6FF] group-hover:translate-x-1 transition-transform">Megtekintés →</span>
+                </div>
+            </a>
+        ))}
+    </div>
+</section>
