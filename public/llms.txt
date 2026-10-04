@@ -1,0 +1,20 @@
+# AzariusDev
+
+> AzariusDev – Web Solutions That Make An Impact. Magyar nyelvű webfejlesztő szolgáltatás: egyedi, villámgyors weboldalak, webáruházak és webalkalmazások tervezése, fejlesztése és üzemeltetése Astro, React, TypeScript és Tailwind CSS technológiával, Cloudflare infrastruktúrán.
+
+Weboldal: https://azariusdev.pages.dev/
+GitHub: https://github.com/Azarius96
+Kapcsolat: a weboldal kapcsolatfelvételi űrlapján (https://azariusdev.pages.dev/#kapcsolat)
+
+## Szolgáltatások
+
+- Villámgyors weboldalak és webalkalmazások: Astro, Tailwind CSS, TypeScript, Cloudflare Edge; 100/100 Google Lighthouse cél.
+- Modern webáruházak: nagy konverziójú webshopok integrált fizetéssel és automatizált számlázással.
+- UI/UX tervezés: Figma prototípusok, sötét/világos témák, reszponzív felületek.
+- Keresőoptimalizálás és biztonság: strukturált adatok, sitemap, Cloudflare SSL és DDoS-védelem.
+
+## Referenciák
+
+- [Búzásbocsárdi Református Egyházközség](https://buzasbocsardirefgyul.pages.dev/): egy 1303 óta működő erdélyi gyülekezet hivatalos weboldala (istentiszteleti rend, egyháztörténet, hírek, térkép, kapcsolatfelvétel). Technológia: Astro 7, Tailwind CSS 4, OpenStreetMap, Cloudflare Pages.
+- [Gyülekezeti Adatbázis](https://gyulekezeti-adatbazis.pages.dev/): teljes körű gyülekezeti nyilvántartó rendszer (tagok, események, házasságok, adományok, járulékok, temető- és sírhely-kezelés, Excel import/export, statisztikák, biztonsági mentés). Technológia: React 19, TypeScript, Vite, Recharts, Fastify, Prisma, PostgreSQL, JWT, Docker, Oracle Cloud, Cloudflare Workers.
+- [365 Bibliai Történet](https://365bibliai.pages.dev/): Evert Kuijt gyerekeknek és tanítóknak szóló kiadványának böngészős változata, kereshető leckegyűjteménnyel és böngészőben generált PDF munkalapokkal. Technológia: Vanilla JavaScript, pdf-lib, LocalStorage, Cloudflare Pages.

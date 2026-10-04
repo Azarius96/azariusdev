@@ -3,9 +3,42 @@ import '../styles/global.css';
 
 interface Props {
 	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	description = 'AzariusDev – egyedi, villámgyors weboldalak, webáruházak és webalkalmazások fejlesztése Astro, React és Tailwind technológiával, Cloudflare-en üzemeltetve.',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'ProfessionalService',
+			'@id': `${Astro.site}#organization`,
+			name: 'AzariusDev',
+			slogan: 'Web Solutions That Make An Impact',
+			description,
+			url: Astro.site?.href,
+			logo: new URL('/favicon.svg', Astro.site).href,
+			sameAs: ['https://github.com/Azarius96'],
+			areaServed: ['HU', 'RO'],
+			knowsLanguage: 'hu',
+			knowsAbout: ['Webfejlesztés', 'Astro', 'React', 'TypeScript', 'Tailwind CSS', 'Cloudflare', 'Webáruház', 'SEO', 'UI/UX tervezés'],
+		},
+		{
+			'@type': 'WebSite',
+			'@id': `${Astro.site}#website`,
+			url: Astro.site?.href,
+			name: 'AzariusDev',
+			inLanguage: 'hu',
+			publisher: { '@id': `${Astro.site}#organization` },
+		},
+	],
+};
 ---
 
 <!DOCTYPE html>
@@ -15,6 +48,26 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="robots" content="index, follow, max-image-preview:large" />
+		<link rel="canonical" href={canonicalURL} />
+		<link rel="sitemap" href="/sitemap.xml" />
+		<link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt" />
+		<meta name="theme-color" content="#090d16" />
+
+		<!-- Open Graph / közösségi megosztás -->
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="hu_HU" />
+		<meta property="og:site_name" content="AzariusDev" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+
+		<!-- Strukturált adatok (Google, AI keresők) -->
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
 		<!-- Google Font: Outfit -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">

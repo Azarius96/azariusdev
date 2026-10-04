@@ -3,32 +3,53 @@ const projects = [
     {
         tag: '01 // EGYHÁZKÖZSÉGI WEBOLDAL',
         title: 'Búzásbocsárdi Református Egyházközség',
-        description: 'Hivatalos bemutatkozó oldal egy 1303 óta működő erdélyi gyülekezetnek: istentiszteleti rend, egyháztörténet, templom-felújítási hírek, térkép és kapcsolatfelvételi űrlap.',
+        description: 'Hivatalos bemutatkozó oldal egy 1303 óta működő erdélyi gyülekezetnek: istentiszteleti rend, egyháztörténet, templom-felújítási hírek, térkép és kapcsolatfelvételi űrlap. Statikusan generált, szinte JavaScript nélküli, villámgyors oldal.',
         url: 'https://buzasbocsardirefgyul.pages.dev/',
         domain: 'buzasbocsardirefgyul.pages.dev',
-        stack: ['Statikus oldal', 'OpenStreetMap', 'Cloudflare Pages'],
+        stack: ['Astro 7', 'Tailwind CSS 4', 'OpenStreetMap', 'Cloudflare Pages'],
         icon: '⛪',
     },
     {
         tag: '02 // WEBALKALMAZÁS',
         title: 'Gyülekezeti Adatbázis',
-        description: 'Gyülekezeti nyilvántartó rendszer saját szerver- és webes réteggel, Docker konténerben, Oracle Cloudon futtatva. Cloudflare reverse-proxy biztosítja a stabil, mindenhonnan elérhető címet.',
+        description: 'Teljes körű gyülekezeti nyilvántartó rendszer: tagok, események, házasságok, adományok és egyházfenntartói járulék, temető- és sírhely-kezelés, Excel import/export, statisztikai dashboard és automatikus biztonsági mentés. Docker konténerben, Oracle Cloudon fut, Cloudflare reverse-proxy mögött.',
         url: 'https://gyulekezeti-adatbazis.pages.dev/',
         domain: 'gyulekezeti-adatbazis.pages.dev',
-        stack: ['Docker', 'Oracle Cloud', 'Cloudflare Proxy'],
+        stack: ['React 19', 'TypeScript', 'Vite', 'Recharts', 'Fastify', 'Prisma', 'PostgreSQL', 'JWT', 'Docker', 'Oracle Cloud', 'Cloudflare Workers'],
         icon: '🗂️',
     },
     {
         tag: '03 // OKTATÁSI ALKALMAZÁS',
         title: '365 Bibliai Történet',
-        description: 'Evert Kuijt gyerekeknek és tanítóknak szóló CD-ROM-os kiadványának modern, böngészőből használható újragondolása — Ó- és Újszövetség, útmutató és támogatási lehetőség.',
+        description: 'Evert Kuijt gyerekeknek és tanítóknak szóló CD-ROM-os kiadványának modern, böngészőből használható újragondolása — kereshető leckegyűjtemény az Ó- és Újszövetségből, tanári anyagokkal és böngészőben generált PDF munkalapokkal.',
         url: 'https://365bibliai.pages.dev/',
         domain: '365bibliai.pages.dev',
-        stack: ['Single Page App', 'Reszponzív', 'Cloudflare Pages'],
+        stack: ['Vanilla JavaScript', 'SPA hash-routing', 'pdf-lib', 'LocalStorage', 'Egyedi CSS', 'Cloudflare Pages'],
         icon: '📖',
     },
 ];
+
+const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'AzariusDev – Munkáink',
+    itemListElement: projects.map((project, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+            '@type': 'WebApplication',
+            name: project.title,
+            description: project.description,
+            url: project.url,
+            inLanguage: 'hu',
+            applicationCategory: 'WebApplication',
+            keywords: project.stack.join(', '),
+            creator: { '@id': `${Astro.site}#organization` },
+        },
+    })),
+};
 ---
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 <section id="munkaink" class="scroll-mt-20 py-16 px-[5%] max-w-[1300px] mx-auto">
     <div class="text-center mb-16 reveal">
         <div class="inline-flex items-center gap-2 bg-[#0072FF]/10 border border-[#0072FF]/30 text-[#00C6FF] px-4 py-1.5 rounded-full text-xs font-semibold mb-4 tracking-wide">
@@ -63,10 +84,13 @@ const projects = [
                     <h3 class="text-xl font-bold mt-1 mb-3">{project.title}</h3>
                     <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-1">{project.description}</p>
 
-                    <div class="flex flex-wrap gap-2 pt-4 border-t border-white/5 mb-4">
-                        {project.stack.map((item) => (
-                            <span class="bg-white/5 border border-white/10 text-xs text-gray-300 px-3 py-1.5 rounded-lg font-mono">{item}</span>
-                        ))}
+                    <div class="pt-4 border-t border-white/5 mb-4">
+                        <span class="block text-[10px] font-semibold tracking-[2px] text-gray-500 uppercase mb-2">Technológiák</span>
+                        <div class="flex flex-wrap gap-2">
+                            {project.stack.map((item) => (
+                                <span class="bg-white/5 border border-white/10 text-xs text-gray-300 px-3 py-1.5 rounded-lg font-mono">{item}</span>
+                            ))}
+                        </div>
                     </div>
 
                     <span class="text-sm font-semibold text-[#00C6FF] group-hover:translate-x-1 transition-transform">Megtekintés →</span>
